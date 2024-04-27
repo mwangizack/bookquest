@@ -131,49 +131,89 @@ table {
 }
 
 #logo {
+  display: inline-block;
+  text-decoration: none;
+  color: initial;
+  margin-top: 1.5rem;
+  margin-left: 4.5rem;
   font-size: 1.5rem;
   font-weight: 600;
 }
-#book {
-  color: #0578ff;
+#logo:hover {
+  cursor: pointer;
 }
+
+#book {
+  color: #8453d3;
+}
+
 #tagline {
   color: #202020;
-  font-size: 4.5rem;
+  font-size: 4rem;
   font-weight: 500;
   line-height: 5rem;
 }
+
 #description {
   color: #606060;
   font-size: 1rem;
   font-weight: 400;
   line-height: normal;
 }
+
 input {
   border-radius: 10px;
 }
-input[type="text"] {
-  padding: 1rem 2.5rem;
-  border: 1px solid rgba(128, 128, 128, 0.5);
-  width: 35.8rem;
+
+form {
+  margin-top: 2.5rem;
 }
+
+input[type="text"] {
+  box-sizing: border-box;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2.5rem;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  width: 100%;
+}
+
 input[type="submit"] {
+  margin-top: 1rem;
   display: block;
   border: none;
-  width: 41rem;
+  width: 100%;
   padding: 1rem 1.5rem;
-  background-color: #0578ff;
+  background-color: #8453d3;
   color: #fff;
   font-weight: 500;
 }
-main{
-    display: flex;
-    height: 100vh;
-}
-#hero-content {
-    width: 60%;
-}
-img {
-    height: 100vh;
+
+input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #5e3c96;
 }
 
+main {
+  display: flex;
+  height: 100vh;
+}
+
+#hero-content {
+  width: 55%;
+}
+
+#hero-image {
+  width: 45%;
+  height: 100vh;
+  background: url("./assets/sid-saxena--7EqDr9UE_M-unsplash\ \(1\).jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#content {
+  margin-top: 6.5rem;
+  margin-left: 4.5rem;
+  margin-right: 4.5rem;
+}
