@@ -127,19 +127,19 @@ table {
 /* Custom styles */
 
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif !important;
 }
 
-#logo {
+.logo {
   display: inline-block;
   text-decoration: none;
   color: initial;
   margin-top: 1.5rem;
   margin-left: 4.5rem;
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 600;
 }
-#logo:hover {
+.logo:hover {
   cursor: pointer;
 }
 
@@ -173,7 +173,7 @@ input[type="text"] {
   box-sizing: border-box;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  padding-left: 2.5rem;
+  padding-left: 2rem;
   border: 1px solid rgba(128, 128, 128, 0.5);
   width: 100%;
 }
@@ -206,7 +206,7 @@ main {
 #hero-image {
   width: 45%;
   height: 100vh;
-  background: url("./assets/sid-saxena--7EqDr9UE_M-unsplash\ \(1\).jpg");
+  background: url("./assets/bookquest-landing-page-image.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -216,4 +216,90 @@ main {
   margin-top: 6.5rem;
   margin-left: 4.5rem;
   margin-right: 4.5rem;
+}
+
+#search-results {
+  background-color: #f3f3f3;
+  padding: 4.5rem;
+}
+
+#search-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+#search-info div p:first-child {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #202020;
+}
+
+#search-info div p:nth-of-type(2n) {
+  margin-top: 0.5rem;
+  color: #606060;
+  font-size: 1rem;
+}
+
+#adjust-search {
+  align-self: flex-end;
+}
+
+#filter {
+  margin-right: 0.5rem;
+}
+
+#books-found {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.book-card {
+  width: 18.75rem;
+  height: 26rem;
+  background-color: #fff;
+  border-radius: 0.4em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.book-card:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 #8453d3;
+}
+
+#cover-container {
+  text-align: center;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+#book-cover {
+  height: 12rem;
+}
+
+#book-details {
+  padding: 0 1.5rem;
+}
+
+#book-details p:first-child {
+  color: #8453d3;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+#book-details p:nth-of-type(2n) {
+  margin-top: 0.5rem;
+  color: #606060;
+  font-size: 1.1rem;
+}
+
+#book-details #overview {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #202020;
+}
+
+.hidden {
+  display: none;
 }

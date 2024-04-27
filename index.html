@@ -17,15 +17,17 @@
   <body>
     <main id="hero-section">
       <section id="hero-content">
-        <a href = "#" id="logo">
+        <a href="#" class="logo">
           <span id="book">Book</span><span id="quest">Quest</span>
         </a>
         <div id="content">
           <p id="tagline">Discover your next favorite read!</p>
           <p id="description">
-            We believe that books have the power to change lives. That's why we're dedicated to helping you find
-            the perfect book for every moment.
+            We believe that books have the power to change lives. That's why
+            we're dedicated to helping you find the perfect book for every
+            moment.
           </p>
+
           <form action="">
             <input
               type="text"
@@ -36,8 +38,60 @@
           </form>
         </div>
       </section>
+
       <section id="hero-image"></section>
     </main>
+
+    <section id="search-results">
+      <div id="search-info">
+        <div>
+          <p>Your Search Results</p>
+          <p><span id="search-count">1234</span> books found</p>
+        </div>
+        <div id="adjust-search">
+          <select name="filter-results" id="filter">
+            <option value="">Publication year</option>
+            <option value="2015">After 2015</option>
+            <option value="2010">After 2010</option>
+            <option value="2005">After 2005</option>
+            <option value="2000">After 2000</option>
+            <option value="1990">After 1990</option>
+          </select>
+          <label for="sort">Sort by</label>
+          <select name="sort-results" id="sort">
+            <option value="">Relevance</option>
+            <option value="rating-high">Rating: High to low</option>
+            <option value="rating-low">Rating: Low to high</option>
+          </select>
+        </div>
+      </div>
+
+      <ul id="books-found">
+        <li class="book-card">
+          <div id="cover-container">
+            <img
+              src="./assets/sample-cover.png"
+              alt="book cover"
+              id="book-cover"
+            />
+          </div>
+          <div id="book-details">
+            <p>
+              <span id="book-title">Sample Title Of a Book</span> by
+              <span id="author">John Doe</span>
+            </p>
+            <p>
+              <span id="pages">123</span> pages .
+              <span id="pub-year">2012</span>
+            </p>
+            <p id="overview">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa
+              obcaecati delectus quae accusamus dicta assumenda!
+            </p>
+          </div>
+        </li>
+      </ul>
+    </section>
 
     <!-- Custom JS script -->
     <script src="./src/script.js"></script>
