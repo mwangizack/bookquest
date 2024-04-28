@@ -169,7 +169,7 @@ form {
   margin-top: 2.5rem;
 }
 
-input[type="text"] {
+#search_item {
   box-sizing: border-box;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -178,7 +178,7 @@ input[type="text"] {
   width: 100%;
 }
 
-input[type="submit"] {
+#search_button {
   margin-top: 1rem;
   display: block;
   border: none;
@@ -189,7 +189,7 @@ input[type="submit"] {
   font-weight: 500;
 }
 
-input[type="submit"]:hover {
+#search_button:hover {
   cursor: pointer;
   background-color: #5e3c96;
 }
@@ -251,6 +251,7 @@ main {
 #books-found {
   margin-top: 1.5rem;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
 }
@@ -261,6 +262,7 @@ main {
   background-color: #fff;
   border-radius: 0.4em;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .book-card:hover {
@@ -280,6 +282,7 @@ main {
 
 #book-details {
   padding: 0 1.5rem;
+  overflow: hidden;
 }
 
 #book-details p:first-child {
@@ -298,6 +301,8 @@ main {
   margin-top: 0.5rem;
   font-size: 1rem;
   color: #202020;
+  height: 4rem;
+  text-overflow: ellipsis;
 }
 
 .hidden {

@@ -28,13 +28,13 @@
             moment.
           </p>
 
-          <form action="">
+          <form>
             <input
               type="text"
-              id="search-item"
+              id="search_item"
               placeholder="Enter book title, author or keyword"
             />
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search" id="search_button" />
           </form>
         </div>
       </section>
@@ -42,11 +42,11 @@
       <section id="hero-image"></section>
     </main>
 
-    <section id="search-results">
+    <section id="search-results" class="hidden">
       <div id="search-info">
         <div>
           <p>Your Search Results</p>
-          <p><span id="search-count">1234</span> books found</p>
+          <p><span id="search-count"></span> books found</p>
         </div>
         <div id="adjust-search">
           <select name="filter-results" id="filter">
@@ -67,10 +67,10 @@
       </div>
 
       <ul id="books-found">
-        <li class="book-card">
+        <!-- <li class="book-card">
           <div id="cover-container">
             <img
-              src="./assets/sample-cover.png"
+              src="./assets/cover-not-found.png"
               alt="book cover"
               id="book-cover"
             />
@@ -85,11 +85,13 @@
               <span id="pub-year">2012</span>
             </p>
             <p id="overview">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa
-              obcaecati delectus quae accusamus dicta assumenda!
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
+              doloremque beatae tempore autem, possimus quis reprehenderit
+              debitis tempora corporis aperiam? Cupiditate veniam ex eos neque,
+              illum distinctio minus in odio.
             </p>
           </div>
-        </li>
+        </li> -->
       </ul>
     </section>
 
