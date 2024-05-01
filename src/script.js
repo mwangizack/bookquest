@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Call OpenLibrary API
-    const userInput = e.target.search_item.value;
+    let userInput = e.target.search_item.value;
     fetch(`https://openlibrary.org/search.json?q=${userInput}`)
       .then((res) => res.json())
       .then((data) => {
