@@ -49,6 +49,13 @@
           <p><span id="search-count"></span> books found</p>
         </div>
         <div id="adjust-search">
+          <label for="sort">Sort by</label>
+          <select name="sort-results" id="sort">
+            <option value="">Relevance</option>
+            <option value="rating-high">Rating: High to low</option>
+            <option value="rating-low">Rating: Low to high</option>
+          </select>
+          <label for="filter">FIlter</label>
           <select name="filter-results" id="filter">
             <option value="">Any publication year</option>
             <option value="2015">After 2015</option>
@@ -56,12 +63,6 @@
             <option value="2005">After 2005</option>
             <option value="2000">After 2000</option>
             <option value="1990">After 1990</option>
-          </select>
-          <label for="sort">Sort by</label>
-          <select name="sort-results" id="sort">
-            <option value="">Relevance</option>
-            <option value="rating-high">Rating: High to low</option>
-            <option value="rating-low">Rating: Low to high</option>
           </select>
         </div>
       </div>

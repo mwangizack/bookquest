@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         ? book.publish_year[publishYears.length - 1]
                         : book.publish_year
                     }</span> . 
-                    <span id="rating">${Math.floor(book.ratings_average) ? Math.floor(book.ratings_average) + '/5 Rating' : 'Rating unavailable'}</span>
+                    <span id="rating">${Math.floor(book.ratings_sortable) ? Math.floor(book.ratings_sortable) + '/5 Rating' : 'Rating unavailable'}</span>
                     </p>
                     <p id="overview">${
                       book.first_sentence
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const requestUrl = `https://openlibrary.org/search.json?q=${userInput}`
             let sortParameter
             if(sortingMethod === 'rating-high'){
-              sortParameter = '&sort=rating&asc=false'
+              sortParameter = '&sort=rating+desc'
               fetch(requestUrl + sortParameter)
               .then(res => res.json())
               .then(data => {
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
               })
               .catch(err => console.log(err))
             }else if(sortingMethod === 'rating-low'){
-              sortParameter = '&sort=rating&asc=true'
+              sortParameter = '&sort=rating+asc'
               fetch(requestUrl + sortParameter)
               .then(res => res.json())
               .then(data => {
