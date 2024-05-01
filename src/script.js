@@ -65,7 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
                       typeof book.publish_year === "object"
                         ? book.publish_year[publishYears.length - 1]
                         : book.publish_year
-                    }</span>
+                    }</span> . 
+                    <span id="rating">${Math.floor(book.ratings_average) ? Math.floor(book.ratings_average) + '/5 Rating' : 'Rating unavailable'}</span>
                     </p>
                     <p id="overview">${
                       book.first_sentence
@@ -84,9 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
           const bookCards = document.querySelectorAll(".book-card");
           const bookCardsArray = Array.from(bookCards);
           bookCardsArray.forEach((bookCard) => {
+            bookCard.classList.remove('hidden')
             const currentBookPubYearElement = bookCard.querySelector('#pub_year');
             const currentBookPubYear = currentBookPubYearElement.textContent;
-            if (parseInt(currentBookPubYear) <= pubYear) {
+            if (parseInt(currentBookPubYear) <= pubYear || currentBookPubYear === 'undefined') {
               bookCard.classList.add("hidden");
             }
           });
@@ -114,6 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
             case "1990":
               pubYear = parseInt("1990");
               filterByPubYear(pubYear);
+              break;
+            default:
+              filterByPubYear("")
               break;
           }
         });
