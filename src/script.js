@@ -5,22 +5,25 @@ document.addEventListener("DOMContentLoaded", () => {
     // Show loading status on the button
     const searchButton = document.querySelector("#search_button");
     searchButton.value = "Loading...";
-    // Call OpenLibrary API
-    const userInput = e.target.search_item.value;
-    fetch(`https://openlibrary.org/search.json?q=${userInput}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const searchCount = document.querySelector("#search-count");
+
+    // Define displayResults function
+    const displayResults = (data) => {
+      const searchCount = document.querySelector("#search-count");
+
         // Display the number of books found
         searchCount.textContent = data.numFound;
+
         // Unhide the search results section
         const searchResultsSection = document.querySelector("#search-results");
         searchResultsSection.classList.remove("hidden");
+
         // Empty the books container
         const booksContainer = document.querySelector("#books-found");
         booksContainer.innerHTML = "";
+
         // Change status of the button
         searchButton.value = "Search";
+
         // Scroll to the search results section
         searchResultsSection.scrollIntoView({ behavior: "smooth" });
 
@@ -77,6 +80,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
           booksContainer.appendChild(bookCard);
         });
+    }
+
+
+    // Call OpenLibrary API
+    const userInput = e.target.search_item.value;
+    fetch(`https://openlibrary.org/search.json?q=${userInput}`)
+      .then((res) => res.json())
+      .then((data) => {
+        displayResults(data)
+
         // Add Filter feature
         const filterDropDown = document.querySelector("#filter");
 
@@ -121,6 +134,55 @@ document.addEventListener("DOMContentLoaded", () => {
               filterByPubYear("")
               break;
           }
+
+          // Add sorting feature
+          const sortDropDown = document.querySelector("#sort");
+
+          // Define sortResults function
+          const sortResults = (sortingMethod) => {
+            const requestUrl = `https://openlibrary.org/search.json?q=${userInput}`
+            let sortParameter
+            if(sortingMethod === 'rating-high'){
+              sortParameter = '&sort=rating&asc=false'
+              fetch(requestUrl + sortParameter)
+              .then(res => res.json())
+              .then(data => {
+                document.querySelector('#books-found').innerHTML = "";
+                displayResults(data)
+              })
+              .catch(err => console.log(err))
+            }else if(sortingMethod === 'rating-low'){
+              sortParameter = '&sort=rating&asc=true'
+              fetch(requestUrl + sortParameter)
+              .then(res => res.json())
+              .then(data => {
+                document.querySelector('#books-found').innerHTML = "";
+                displayResults(data)
+              })
+            }else{
+              sortParameter = ''
+              fetch(requestUrl + sortParameter)
+              .then(res => res.json())
+              .then(data => {
+                document.querySelector('#books-found').innerHTML = "";
+                displayResults(data)
+              })
+            }
+          }
+
+          sortDropDown.addEventListener('change', e => {
+            switch(e.target.value){
+              case "rating-high":
+                sortResults('rating-high')
+                break;
+              case "rating-low":
+                sortResults('rating-low')
+                break;
+              default:
+                sortResults('')
+                break;
+            }
+          })
         });
       })
       .catch((error) => console.log(error));

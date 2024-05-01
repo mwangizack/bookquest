@@ -294,7 +294,7 @@ main {
 #book-details p:nth-of-type(2n) {
   margin-top: 0.5rem;
   color: #606060;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 #book-details #overview {
