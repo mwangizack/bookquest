@@ -305,6 +305,27 @@ main {
   text-overflow: ellipsis;
 }
 
+#top-btn {
+  box-sizing: border-box;
+  background-color: #8453d3;
+  color: #fff;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  position: fixed;
+  bottom: 1rem;
+  right: 1.5rem;
+}
+
+#top-btn:hover {
+  cursor: pointer;
+  background-color: #5e3c96;
+}
+
 .hidden {
-  display: none;
+  display: none !important; 
 }

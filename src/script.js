@@ -10,28 +10,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const displayResults = (data) => {
       const searchCount = document.querySelector("#search-count");
 
-        // Display the number of books found
-        searchCount.textContent = data.numFound;
+      // Display the number of books found
+      searchCount.textContent = data.numFound;
 
-        // Unhide the search results section
-        const searchResultsSection = document.querySelector("#search-results");
-        searchResultsSection.classList.remove("hidden");
+      // Unhide the search results section
+      const searchResultsSection = document.querySelector("#search-results");
+      searchResultsSection.classList.remove("hidden");
 
-        // Empty the books container
-        const booksContainer = document.querySelector("#books-found");
-        booksContainer.innerHTML = "";
+      // Empty the books container
+      const booksContainer = document.querySelector("#books-found");
+      booksContainer.innerHTML = "";
 
-        // Change status of the button
-        searchButton.value = "Search";
+      // Change status of the button
+      searchButton.value = "Search";
 
-        // Scroll to the search results section
-        searchResultsSection.scrollIntoView({ behavior: "smooth" });
+      // Scroll to the search results section
+      searchResultsSection.scrollIntoView({ behavior: "smooth" });
 
-        data.docs.forEach((book) => {
-          const bookCard = document.createElement("li");
-          bookCard.classList.add("book-card");
-          const publishYears = book.publish_year;
-          bookCard.innerHTML = `
+      data.docs.forEach((book) => {
+        const bookCard = document.createElement("li");
+        bookCard.classList.add("book-card");
+        const publishYears = book.publish_year;
+        bookCard.innerHTML = `
                 <div id="cover-container">
                     <img
                         src=${
@@ -69,7 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         ? book.publish_year[publishYears.length - 1]
                         : book.publish_year
                     }</span> . 
-                    <span id="rating">${Math.floor(book.ratings_sortable) ? Math.floor(book.ratings_sortable) + '/5 Rating' : 'Rating unavailable'}</span>
+                    <span id="rating">${
+                      Math.floor(book.ratings_sortable)
+                        ? Math.floor(book.ratings_sortable) + "/5 Rating"
+                        : "Rating unavailable"
+                    }</span>
                     </p>
                     <p id="overview">${
                       book.first_sentence
@@ -78,17 +82,25 @@ document.addEventListener("DOMContentLoaded", () => {
                     }</p>
                 </div>
                 `;
-          booksContainer.appendChild(bookCard);
-        });
-    }
-
+        booksContainer.appendChild(bookCard);
+      });
+    };
 
     // Call OpenLibrary API
     let userInput = e.target.search_item.value;
     fetch(`https://openlibrary.org/search.json?q=${userInput}`)
       .then((res) => res.json())
       .then((data) => {
-        displayResults(data)
+        displayResults(data);
+
+        // Reveal back-to-top button after the user scrolls down by 800px and hide after scroll up
+        window.onscroll = function(){
+          if(document.body.scrollTop > 800 || document.documentElement.scrollTop > 800){
+            document.querySelector('#top-btn').classList.remove('hidden')
+          }else{
+            document.querySelector('#top-btn').classList.add('hidden')
+          }
+        }
 
         // Add Filter feature
         const filterDropDown = document.querySelector("#filter");
@@ -98,10 +110,14 @@ document.addEventListener("DOMContentLoaded", () => {
           const bookCards = document.querySelectorAll(".book-card");
           const bookCardsArray = Array.from(bookCards);
           bookCardsArray.forEach((bookCard) => {
-            bookCard.classList.remove('hidden')
-            const currentBookPubYearElement = bookCard.querySelector('#pub_year');
+            bookCard.classList.remove("hidden");
+            const currentBookPubYearElement =
+              bookCard.querySelector("#pub_year");
             const currentBookPubYear = currentBookPubYearElement.textContent;
-            if (parseInt(currentBookPubYear) <= pubYear || currentBookPubYear === 'undefined') {
+            if (
+              parseInt(currentBookPubYear) <= pubYear ||
+              currentBookPubYear === "undefined"
+            ) {
               bookCard.classList.add("hidden");
             }
           });
@@ -131,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
               filterByPubYear(pubYear);
               break;
             default:
-              filterByPubYear("")
+              filterByPubYear("");
               break;
           }
 
@@ -140,52 +156,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Define sortResults function
           const sortResults = (sortingMethod) => {
-            const requestUrl = `https://openlibrary.org/search.json?q=${userInput}`
-            let sortParameter
-            if(sortingMethod === 'rating-high'){
-              sortParameter = '&sort=rating+desc'
+            const requestUrl = `https://openlibrary.org/search.json?q=${userInput}`;
+            let sortParameter;
+            if (sortingMethod === "rating-high") {
+              sortParameter = "&sort=rating+desc";
               fetch(requestUrl + sortParameter)
-              .then(res => res.json())
-              .then(data => {
-                document.querySelector('#books-found').innerHTML = "";
-                displayResults(data)
-              })
-              .catch(err => console.log(err))
-            }else if(sortingMethod === 'rating-low'){
-              sortParameter = '&sort=rating+asc'
+                .then((res) => res.json())
+                .then((data) => {
+                  document.querySelector("#books-found").innerHTML = "";
+                  displayResults(data);
+                })
+                .catch((err) => console.log(err));
+            } else if (sortingMethod === "rating-low") {
+              sortParameter = "&sort=rating+asc";
               fetch(requestUrl + sortParameter)
-              .then(res => res.json())
-              .then(data => {
-                document.querySelector('#books-found').innerHTML = "";
-                displayResults(data)
-              })
-            }else{
-              sortParameter = ''
+                .then((res) => res.json())
+                .then((data) => {
+                  document.querySelector("#books-found").innerHTML = "";
+                  displayResults(data);
+                });
+            } else {
+              sortParameter = "";
               fetch(requestUrl + sortParameter)
-              .then(res => res.json())
-              .then(data => {
-                document.querySelector('#books-found').innerHTML = "";
-                displayResults(data)
-              })
+                .then((res) => res.json())
+                .then((data) => {
+                  document.querySelector("#books-found").innerHTML = "";
+                  displayResults(data);
+                });
             }
-          }
+          };
 
-          sortDropDown.addEventListener('change', e => {
-            switch(e.target.value){
+          sortDropDown.addEventListener("change", (e) => {
+            switch (e.target.value) {
               case "rating-high":
-                sortResults('rating-high')
+                sortResults("rating-high");
                 break;
               case "rating-low":
-                sortResults('rating-low')
+                sortResults("rating-low");
                 break;
               default:
-                sortResults('')
+                sortResults("");
                 break;
             }
-          })
+          });
         });
       })
       .catch((error) => console.log(error));
     form.reset();
   });
+
+  // Add event handler for back-to-top button
+  const topBtn  = document.querySelector('#top-btn')
+  topBtn.addEventListener('click', e => {
+    window.scrollTo({top: 0,left: 0, behavior: 'smooth'})
+  })
 });
