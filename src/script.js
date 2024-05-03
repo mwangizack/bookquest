@@ -94,13 +94,52 @@ document.addEventListener("DOMContentLoaded", () => {
         displayResults(data);
 
         // Reveal back-to-top button after the user scrolls down by 800px and hide after scroll up
-        window.onscroll = function(){
-          if(document.body.scrollTop > 800 || document.documentElement.scrollTop > 800){
-            document.querySelector('#top-btn').classList.remove('hidden')
-          }else{
-            document.querySelector('#top-btn').classList.add('hidden')
+        window.onscroll = function () {
+          if (
+            document.body.scrollTop > 800 ||
+            document.documentElement.scrollTop > 800
+          ) {
+            document.querySelector("#top-btn").classList.remove("hidden");
+          } else {
+            document.querySelector("#top-btn").classList.add("hidden");
           }
-        }
+        };
+
+        // Add sorting feature
+        const sortDropDown = document.querySelector("#sort");
+
+        // Define sortResults function
+        const sortResults = (sortingMethod) => {
+          let requestUrl = `https://openlibrary.org/search.json?q=${userInput}`;
+          let sortParameter = '';
+          if (sortingMethod === "rating-high") {
+            sortParameter = "&sort=rating+desc";
+          }else if (sortingMethod === "rating-low") {
+            sortParameter = "&sort=rating+asc";
+          }
+
+          fetch(requestUrl + sortParameter)
+          .then((res) => res.json())
+          .then((data) => {
+            document.querySelector("#books-found").innerHTML = "";
+            displayResults(data);
+          })
+          .catch((err) => console.log(err));
+        };
+
+        sortDropDown.addEventListener("change", (e) => {
+          switch (e.target.value) {
+            case "rating-high":
+              sortResults("rating-high");
+              break;
+            case "rating-low":
+              sortResults("rating-low");
+              break;
+            default:
+              sortResults("");
+              break;
+          }
+        });
 
         // Add Filter feature
         const filterDropDown = document.querySelector("#filter");
@@ -151,54 +190,6 @@ document.addEventListener("DOMContentLoaded", () => {
               break;
           }
 
-          // Add sorting feature
-          const sortDropDown = document.querySelector("#sort");
-
-          // Define sortResults function
-          const sortResults = (sortingMethod) => {
-            const requestUrl = `https://openlibrary.org/search.json?q=${userInput}`;
-            let sortParameter;
-            if (sortingMethod === "rating-high") {
-              sortParameter = "&sort=rating+desc";
-              fetch(requestUrl + sortParameter)
-                .then((res) => res.json())
-                .then((data) => {
-                  document.querySelector("#books-found").innerHTML = "";
-                  displayResults(data);
-                })
-                .catch((err) => console.log(err));
-            } else if (sortingMethod === "rating-low") {
-              sortParameter = "&sort=rating+asc";
-              fetch(requestUrl + sortParameter)
-                .then((res) => res.json())
-                .then((data) => {
-                  document.querySelector("#books-found").innerHTML = "";
-                  displayResults(data);
-                });
-            } else {
-              sortParameter = "";
-              fetch(requestUrl + sortParameter)
-                .then((res) => res.json())
-                .then((data) => {
-                  document.querySelector("#books-found").innerHTML = "";
-                  displayResults(data);
-                });
-            }
-          };
-
-          sortDropDown.addEventListener("change", (e) => {
-            switch (e.target.value) {
-              case "rating-high":
-                sortResults("rating-high");
-                break;
-              case "rating-low":
-                sortResults("rating-low");
-                break;
-              default:
-                sortResults("");
-                break;
-            }
-          });
         });
       })
       .catch((error) => console.log(error));
@@ -206,8 +197,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Add event handler for back-to-top button
-  const topBtn  = document.querySelector('#top-btn')
-  topBtn.addEventListener('click', e => {
-    window.scrollTo({top: 0,left: 0, behavior: 'smooth'})
-  })
+  const topBtn = document.querySelector("#top-btn");
+  topBtn.addEventListener("click", (e) => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  });
 });
